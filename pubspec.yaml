@@ -10,9 +10,10 @@ dependencies:
 
   flutter_custom_tabs: "^0.1.0"
   html: "^0.13.3"
-  cached_network_image: "^0.4.0"
+  cached_network_image: 
+    git: git://github.com/Eimji/flutter_cached_network_image
   video_player: "^0.5.2"
-
+  flutter_youtube:
 
 environment:
   sdk: ">=2.0.0-dev.28.0 <3.0.0"

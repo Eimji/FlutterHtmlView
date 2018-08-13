@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart' as cTab;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_youtube/flutter_youtube.dart';
 
 class HtmlText extends StatelessWidget {
   final String data;
@@ -38,7 +39,12 @@ class HtmlText extends StatelessWidget {
   TapGestureRecognizer recognizer(String url) {
     return new TapGestureRecognizer()
       ..onTap = () {
-        if (url.startsWith("http:") || url.startsWith("https:")) {
+        if (url.startsWith("https://youtu.be/") || url.startsWith("https://www.youtube.com/watch")) {
+          FlutterYoutube.playYoutubeVideoByUrl(
+            apiKey: "AIzaSyAbqfmUR5tOMkZs98YkfZ43BGmxH90J_RA",
+            videoUrl: url,
+          );
+        } else if (url.startsWith("http:") || url.startsWith("https:")) {
           _launchURL(url);
         } else {
           _launchOtherURL(url);

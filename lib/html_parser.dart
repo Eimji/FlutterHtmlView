@@ -11,7 +11,7 @@ class HtmlParser {
   HtmlParser();
 
   _parseChildren(e, widgetList) {
-    print(e);
+    //print(e);
     if (e.localName == "img" && e.attributes.containsKey('src')) {
       var src = e.attributes['src'];
 
@@ -40,7 +40,7 @@ class HtmlParser {
     } else if (!e.outerHtml.contains("<img") ||
         !e.outerHtml.contains("<video") ||
         !e.hasContent()) {
-      print(e.outerHtml);
+      //print(e.outerHtml);
       widgetList.add(new HtmlText(data: e.outerHtml));
     }
 
