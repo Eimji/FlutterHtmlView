@@ -5,19 +5,46 @@ import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' show parse;
 import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:zoomable_image/zoomable_image.dart';
 import 'package:video_player/video_player.dart';
 
 class HtmlParser {
-  HtmlParser();
+  final BuildContext context;
+
+  HtmlParser(this.context);
 
   _parseChildren(e, widgetList) {
     if (e.localName == "img" && e.attributes.containsKey('src')) {
       var src = e.attributes['src'];
 
       if (src.startsWith("http") || src.startsWith("https")) {
-        widgetList.add(new CachedNetworkImage(
-          imageUrl: src,
-          fit: BoxFit.cover,
+        widgetList.add(new GestureDetector(
+          onTap: () { 
+            Navigator.of(context).push(new MaterialPageRoute<Null>(builder: (BuildContext context) {
+
+              return new Scaffold(
+                appBar: new AppBar(
+                  title: const Text('Image'),
+                  backgroundColor: new Color(0xFF000000),
+                ),
+                body: new ZoomableImage(
+                  new CachedNetworkImageProvider(
+                    src, 
+                    width: src.contains('.jpg') ? MediaQuery.of(context).devicePixelRatio * MediaQuery.of(context).size.width : null,
+                  ),
+                  backgroundColor: Colors.black,
+                  placeholder: new Center(child: new CircularProgressIndicator()),
+                ),
+              );
+
+            }));                      
+          },
+          child: new CachedNetworkImage(
+            imageUrl: src,
+            fit: BoxFit.cover,
+            width: src.contains('.jpg') ? MediaQuery.of(context).size.width : null,
+            deviceRatio: src.contains('.jpg') ? MediaQuery.of(context).devicePixelRatio : null,
+          ),
         ));
       } else if (src.startsWith('data:image')) {
         var exp = new RegExp(r'data:.*;base64,');

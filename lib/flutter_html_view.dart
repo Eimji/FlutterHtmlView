@@ -8,7 +8,7 @@ class HtmlView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HtmlParser htmlParser = new HtmlParser();
+    HtmlParser htmlParser = new HtmlParser(context);
 
     List<Widget> nodes = htmlParser.HParse(this.data);
 
