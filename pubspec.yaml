@@ -13,6 +13,7 @@ dependencies:
   cached_network_image: 
     git: git://github.com/Eimji/flutter_cached_network_image
   zoomable_image: 
+    # for SDK >= 2.0
     git: git://github.com/Eimji/flutter_zoomable_image
   video_player: 
   flutter_youtube:
