@@ -12,8 +12,7 @@ dependencies:
   html: "^0.13.3"
   cached_network_image: 
     git: git://github.com/Eimji/flutter_cached_network_image
-  zoomable_image: 
-    git: git://github.com/Eimji/flutter_zoomable_image
+  zoomable_image: '>= 1.2.0'
   video_player: 
   flutter_youtube:
 
