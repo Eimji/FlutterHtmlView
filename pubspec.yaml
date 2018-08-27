@@ -8,7 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_custom_tabs: "^0.1.0"
+  flutter_custom_tabs:
   html: "^0.13.3"
   cached_network_image: 
     git: git://github.com/Eimji/flutter_cached_network_image
