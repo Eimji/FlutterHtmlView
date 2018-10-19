@@ -1,3 +1,22 @@
+## [0.5.9]
+
+* add base URL to class constructor to support some Html created by online editor.
+
+## [0.5.8]
+
+* cache image network dependency import fixed
+* [Issue #44](https://github.com/PonnamKarthik/FlutterHtmlView/issues/44) Removed print
+
+## [0.5.7]
+
+* cache image network dependency crash fixed
+
+## [0.5.5]
+
+* Video -> Source tag Now Supported
+* flutter_custom_tabs Fixed
+* Updated latest dependencies
+ 
 ## [0.5.4]
 
 * video_player dependencies to ^0.6.4
