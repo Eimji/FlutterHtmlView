@@ -11,9 +11,10 @@ import 'package:video_player/video_player.dart';
 
 class HtmlParser {
   final String baseUrl;
+  final String youtubeApiKey;
   final BuildContext context;
 
-  HtmlParser(this.context, {this.baseUrl});
+  HtmlParser(this.context, {this.baseUrl, this.youtubeApiKey});
 
   _parseChildren(dom.Element e, widgetList) {
 //    print(e.localName);
@@ -94,7 +95,7 @@ class HtmlParser {
     } else if (!e.outerHtml.contains("<img") ||
         !e.outerHtml.contains("<video") ||
         !e.hasContent()) {
-      widgetList.add(new HtmlText(data: e.outerHtml));
+      widgetList.add(new HtmlText(data: e.outerHtml, youtubeApiKey: this.youtubeApiKey));
     } else if (e.children.length > 0)
       e.children.forEach((e) => _parseChildren(e, widgetList));
   }

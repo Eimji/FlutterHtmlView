@@ -7,10 +7,11 @@ import 'package:flutter_youtube/flutter_youtube.dart';
 class HtmlText extends StatelessWidget {
   final String data;
   final Widget style;
+  final String youtubeApiKey;
 
   BuildContext ctx;
 
-  HtmlText({this.data, this.style});
+  HtmlText({this.data, this.style, this.youtubeApiKey});
 
   void _launchURL(String url) async {
     try {
@@ -42,7 +43,7 @@ class HtmlText extends StatelessWidget {
       ..onTap = () {
         if (url.startsWith("https://youtu.be/") || url.startsWith("https://www.youtube.com/watch")) {
           FlutterYoutube.playYoutubeVideoByUrl(
-            apiKey: "",
+            apiKey: this.youtubeApiKey,
             videoUrl: url,
           );
         } else if (url.startsWith("http:") || url.startsWith("https:")) {
