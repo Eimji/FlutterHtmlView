@@ -5,13 +5,14 @@ class HtmlView extends StatelessWidget {
   final String data;
   final EdgeInsetsGeometry padding;
   final String baseURL;
+  final Function onLaunchFail;
   final String youtubeApiKey;
 
-  HtmlView({this.data, this.padding = const EdgeInsets.all(5.0), this.baseURL, this.youtubeApiKey});
+  HtmlView({this.data, this.padding = const EdgeInsets.all(5.0), this.baseURL, this.onLaunchFail, this.youtubeApiKey});
 
   @override
   Widget build(BuildContext context) {
-    HtmlParser htmlParser = new HtmlParser(context, baseUrl: this.baseURL, youtubeApiKey: this.youtubeApiKey);
+    HtmlParser htmlParser = new HtmlParser(context, baseUrl: this.baseURL, onLaunchFail: this.onLaunchFail, youtubeApiKey: this.youtubeApiKey);
     List<Widget> nodes = htmlParser.parseHTML(this.data);
     return new Container(
         padding: padding,

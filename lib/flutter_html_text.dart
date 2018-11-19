@@ -7,11 +7,12 @@ import 'package:flutter_youtube/flutter_youtube.dart';
 class HtmlText extends StatelessWidget {
   final String data;
   final Widget style;
+  final Function onLaunchFail;
   final String youtubeApiKey;
 
   BuildContext ctx;
 
-  HtmlText({this.data, this.style, this.youtubeApiKey});
+  HtmlText({this.data, this.style, this.onLaunchFail, this.youtubeApiKey});
 
   void _launchURL(String url) async {
     try {
@@ -35,6 +36,10 @@ class HtmlText extends StatelessWidget {
       await launch(url);
     } else {
       print('Could not launch $url');
+
+      if (this.onLaunchFail != null) {
+        this.onLaunchFail(url);
+      }
     }
   }
 
