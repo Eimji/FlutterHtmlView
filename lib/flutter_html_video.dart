@@ -234,10 +234,10 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
   @override
   Widget build(BuildContext context) {
     if (initialized) {
-      if (controller.value.aspectRatio > 0.4) {
+      if (controller.value.aspectRatio < 1.0) {
         return new Center(
           child: new Container(
-            width: MediaQuery.of(context).size.width * 0.5,
+            width: MediaQuery.of(context).size.width * controller.value.aspectRatio,
             child: new AspectRatio(
               aspectRatio: controller.value.aspectRatio,
               child: new VideoPlayPause(controller),
