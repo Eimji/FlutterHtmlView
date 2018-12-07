@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayPause extends StatefulWidget {
@@ -237,16 +240,20 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
       if (controller.value.aspectRatio < 1.0) {
         return new Center(
           child: new Container(
-            width: MediaQuery.of(context).size.width * controller.value.aspectRatio,
-            child: new AspectRatio(
+            width: min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) > 360 ? max(MediaQuery.of(context).size.width * controller.value.aspectRatio, 320) : MediaQuery.of(context).size.width * controller.value.aspectRatio,
+            child: min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) > 360 ? new Chewie(controller,
+              aspectRatio: controller.value.aspectRatio,
+            ) : new AspectRatio(
               aspectRatio: controller.value.aspectRatio,
               child: new VideoPlayPause(controller),
             ),
           ),
         );
       } else {
-        return new Center(
-          child: new AspectRatio(
+        return new Center(      
+          child: min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) > 360 ?  new Chewie(controller, 
+            aspectRatio: controller.value.aspectRatio,
+          ) : new AspectRatio(
             aspectRatio: controller.value.aspectRatio,
             child: new VideoPlayPause(controller),
           ),
