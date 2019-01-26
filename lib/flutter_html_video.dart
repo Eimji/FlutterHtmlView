@@ -237,12 +237,17 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
   @override
   Widget build(BuildContext context) {
     if (initialized) {
+      final chewieController = ChewieController(
+        videoPlayerController: controller,
+        aspectRatio: controller.value.aspectRatio,
+        autoPlay: true,
+        looping: false,
+      );
       if (controller.value.aspectRatio < 1.0) {
         return new Center(
           child: new Container(
             width: min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) > 360 ? max(MediaQuery.of(context).size.width * controller.value.aspectRatio, 320) : MediaQuery.of(context).size.width * controller.value.aspectRatio,
-            child: min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) > 360 ? new Chewie(controller,
-              aspectRatio: controller.value.aspectRatio,
+            child: min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) > 360 ? new Chewie(controller: chewieController
             ) : new AspectRatio(
               aspectRatio: controller.value.aspectRatio,
               child: new VideoPlayPause(controller),
@@ -251,8 +256,7 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
         );
       } else {
         return new Center(      
-          child: min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) > 360 ?  new Chewie(controller, 
-            aspectRatio: controller.value.aspectRatio,
+          child: min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) > 360 ?  new Chewie(controller: chewieController
           ) : new AspectRatio(
             aspectRatio: controller.value.aspectRatio,
             child: new VideoPlayPause(controller),

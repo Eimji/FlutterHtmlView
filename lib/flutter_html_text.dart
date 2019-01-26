@@ -6,13 +6,15 @@ import 'package:flutter_youtube/flutter_youtube.dart';
 
 class HtmlText extends StatelessWidget {
   final String data;
+  final TextOverflow overflow;
   final Widget style;
+  final int maxLines;
   final Function onLaunchFail;
   final String youtubeApiKey;
 
   BuildContext ctx;
 
-  HtmlText({this.data, this.style, this.onLaunchFail, this.youtubeApiKey});
+  HtmlText({this.data, this.style, this.onLaunchFail, this.overflow, this.maxLines, this.youtubeApiKey});
 
   void _launchURL(String url) async {
     try {
@@ -66,10 +68,22 @@ class HtmlText extends StatelessWidget {
     List nodes = parser.parse(this.data);
 
     TextSpan span = this._stackToTextSpan(nodes, context);
-    RichText contents = new RichText(
-      text: span,
-      softWrap: true,
-    );
+
+
+    RichText contents;
+    if (overflow != null && maxLines != null) {
+      contents = new RichText(
+        text: span,
+        softWrap: true,
+        overflow: this.overflow,
+        maxLines: this.maxLines,
+      );
+    } else {
+      contents = new RichText(
+        text: span,
+        softWrap: true,
+      );
+    }
 
     return new Container(
         padding:
@@ -510,6 +524,11 @@ class HtmlParser {
             fontStyle =
                 (value == 'italic') ? FontStyle.italic : FontStyle.normal;
 
+            break;
+
+          case 'font-size':
+             fontSize = double.parse(value);
+             
             break;
 
           case 'text-decoration':
