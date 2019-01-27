@@ -218,6 +218,7 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
   bool initialized = false;
 
   VoidCallback listener;
+  ChewieController chewieController;
 
   @override
   void initState() {
@@ -228,6 +229,14 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
       }
       if (initialized != controller.value.initialized) {
         initialized = controller.value.initialized;
+        if (initialized) {
+          chewieController = ChewieController(
+            videoPlayerController: controller,
+            aspectRatio: controller.value.aspectRatio,
+            autoPlay: true,
+            looping: false,
+          );
+        }
         setState(() {});
       }
     };
@@ -235,14 +244,16 @@ class AspectRatioVideoState extends State<AspectRatioVideo> {
   }
 
   @override
+  void dispose() {
+    if (chewieController != null)
+      chewieController.dispose();
+
+    super.dispose();
+  }
+  
+  @override
   Widget build(BuildContext context) {
     if (initialized) {
-      final chewieController = ChewieController(
-        videoPlayerController: controller,
-        aspectRatio: controller.value.aspectRatio,
-        autoPlay: true,
-        looping: false,
-      );
       if (controller.value.aspectRatio < 1.0) {
         return new Center(
           child: new Container(
