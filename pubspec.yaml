@@ -14,6 +14,7 @@ dependencies:
   zoomable_image: 
     git: git://github.com/Eimji/flutter_zoomable_image
   chewie: 
+    git: git://github.com/Eimji/chewie
   flutter_youtube:
   flutter_markdown: ^0.2.0
   html2md: ^0.3.0
